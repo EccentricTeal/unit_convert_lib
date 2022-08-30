@@ -3,7 +3,7 @@
 <package format="3">
   <name>unit_convert_lib</name>
   <version>1.0.0</version>
-  <description>Header library to convert unit. ROS2 applicable</description>
+  <description>ROS2 library to convert values.</description>
   <maintainer email="suisei_wada@naoe.eng.osaka-u.ac.jp">suisei</maintainer>
   <license>Appache 2.0</license>
 
