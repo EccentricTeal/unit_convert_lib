@@ -1,18 +1,13 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<package format="2">
   <name>unit_convert_lib</name>
-  <version>1.0.0</version>
-  <description>ROS2 library to convert values.</description>
-  <maintainer email="suisei_wada@naoe.eng.osaka-u.ac.jp">suisei</maintainer>
-  <license>Appache 2.0</license>
+  <version>0.2.0</version>
+  <description>ROS1 library to convert values.</description>
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
+  <maintainer email="suisei_wada@naoe.eng.osaka-u.ac.jp">Wada Suisei</maintainer>
 
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+  <license>TODO</license>
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
+  <buildtool_depend>catkin</buildtool_depend>
+
 </package>
