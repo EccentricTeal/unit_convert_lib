@@ -38,7 +38,7 @@ namespace unitcon::coordinate
       void init_A( void );
       void init_Abar( void );
       double calc_Sbar( double origin_lat_rad );
-      double calc_t( double origin_lat_rad );
+      double calc_t( double lat_rad );
       double calc_epsilon_dash( double epsilon, double eta );
       double calc_eta_dash( double epsilon, double eta );
       

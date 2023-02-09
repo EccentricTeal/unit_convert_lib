@@ -5,10 +5,9 @@ namespace unitcon::coordinate
 {
   GlobalLocalConvert::GlobalLocalConvert()
   {
-    init_alpha();
     init_A();
     init_Abar();
-
+    init_alpha();
     init_beta();
     init_theta();
   }
@@ -110,7 +109,7 @@ namespace unitcon::coordinate
       ( 15.0 / 64.0 ) * std::pow( n, 4.0 );
     A[3] =
       -( 35.0 / 48.0 ) * std::pow( n, 3.0 ) +
-      ( 175.0 / 630.0 ) * std::pow( n, 5.0 );
+      ( 175.0 / 768.0 ) * std::pow( n, 5.0 );
     A[4] =
       ( 315.0 / 512.0 ) * std::pow( n, 4.0 );
     A[5] =
@@ -119,7 +118,7 @@ namespace unitcon::coordinate
 
   void GlobalLocalConvert::init_Abar( void )
   {
-    A_bar = ( m_0 * a / ( 1.0 + n ) ) * A[0];
+    A_bar = ( m_0 * a * A[0] ) / ( 1.0 + n );
   }
 
   double GlobalLocalConvert::calc_Sbar( double origin_lat_rad )
@@ -129,16 +128,16 @@ namespace unitcon::coordinate
     {
       S_bar += A[i] * std::sin( 2.0 * static_cast<double>(i) * origin_lat_rad );
     }
-    S_bar *= m_0 * a / ( 1.0 + n );
+    S_bar *= ( ( m_0 * a ) / ( 1.0 + n ) );
 
     return S_bar;
   }
 
-  double GlobalLocalConvert::calc_t( double origin_lat_rad )
+  double GlobalLocalConvert::calc_t( double lat_rad )
   {
     double t = std::sinh(
-        std::atanh ( std::sin( origin_lat_rad ) ) -
-        ( 2.0 * std::sqrt(n) / ( 1.0 + n ) ) * atanh( ( 2.0 * std::sqrt(n) / ( 1.0 + n ) ) * std::sin( origin_lat_rad ) )
+        std::atanh ( std::sin( lat_rad ) ) -
+        ( 2.0 * std::sqrt(n) / ( 1.0 + n ) ) * atanh( ( 2.0 * std::sqrt(n) / ( 1.0 + n ) ) * std::sin( lat_rad ) )
       );
 
     return t;
@@ -183,10 +182,10 @@ namespace unitcon::coordinate
       unitcon::angle::deg2rad( lat_deg ),
       unitcon::angle::deg2rad( lon_deg )
     };
-    double t = calc_t( origin(0) );
+    double t = calc_t( gnsspos(0) );
     double t_bar = std::sqrt( 1 + std::pow( t, 2.0 ) );
-    double lambda_c = std::cos( gnsspos(0) - origin(0) );
-    double lambda_s = std::sin( gnsspos(0) - origin(0) );
+    double lambda_c = std::cos( gnsspos(1) - origin(1) );
+    double lambda_s = std::sin( gnsspos(1) - origin(1) );
     double xi = std::atan2( t, lambda_c );
     double eta = std::atanh( lambda_s / t_bar );
     double S_bar = calc_Sbar( origin(0) );
